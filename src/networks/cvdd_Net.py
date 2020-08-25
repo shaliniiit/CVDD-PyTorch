@@ -42,4 +42,4 @@ class CVDDNet(BaseNet):
         cosine_dists = 0.5 * (1 - self.cosine_sim(M, self.c))
         context_weights = F.softmax(-self.alpha * cosine_dists, dim=1)
 
-        return cosine_dists, context_weights, A
+        return cosine_dists, context_weights, A, M
