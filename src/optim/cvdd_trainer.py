@@ -100,7 +100,7 @@ class CVDDTrainer(BaseTrainer):
                 # Update network parameters via backpropagation: forward + backward + optimize
 
                 # forward pass
-                cosine_dists, context_weights, A = net(text_batch)
+                cosine_dists, context_weights, A, M = net(text_batch)
                 scores = context_weights * cosine_dists
                 # scores.shape = (batch_size, n_attention_heads)
                 # A.shape = (batch_size, n_attention_heads, sentence_length)
@@ -183,7 +183,7 @@ class CVDDTrainer(BaseTrainer):
                 text_batch, label_batch = text_batch.to(self.device), label_batch.to(self.device)
 
                 # forward pass
-                cosine_dists, context_weights, A = net(text_batch)
+                cosine_dists, context_weights, A, M = net(text_batch)
                 scores = context_weights * cosine_dists
                 _, best_att_head = torch.min(scores, dim=1)
 
